@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Users Management - SiraLink Admin</title>
+
+<link rel="stylesheet" href="../../assets/css/admin.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+}
+
+.header{
+background:#0A3D91;
+color:white;
+padding:20px;
+}
+
+.container{
+padding:20px;
+}
+
+.top-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.search-box{
+flex:1;
+min-width:250px;
+}
+
+.search-box input{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-bottom:20px;
+}
+
+.stat-card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.stat-card h2{
+color:#0A3D91;
+font-size:28px;
+margin-bottom:5px;
+}
+
+.table-card{
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#0A3D91;
+color:white;
+padding:14px;
+text-align:left;
+}
+
+td{
+padding:14px;
+border-bottom:1px solid #eee;
+}
+
+.status{
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
+}
+
+.active{
+background:#d4edda;
+color:#155724;
+}
+
+.inactive{
+background:#f8d7da;
+color:#721c24;
+}
+
+.btn{
+padding:8px 12px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:12px;
+font-weight:bold;
+margin-right:5px;
+}
+
+.view{
+background:#0A3D91;
+color:white;
+}
+
+.delete{
+background:#dc3545;
+color:white;
+}
+
+@media(max-width:768px){
+
+table{
+display:block;
+overflow-x:auto;
+white-space:nowrap;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>Users Management</h1>
+</div>
+
+<div class="container">
+
+<div class="stats">
+
+<div class="stat-card">
+<h2 id="totalUsers">1250</h2>
+<p>Total Users</p>
+</div>
+
+<div class="stat-card">
+<h2 id="activeUsers">1080</h2>
+<p>Active Users</p>
+</div>
+
+<div class="stat-card">
+<h2 id="newUsers">85</h2>
+<p>New This Month</p>
+</div>
+
+</div>
+
+<div class="top-bar">
+
+<div class="search-box">
+<input
+type="text"
+id="searchInput"
+placeholder="Search users...">
+</div>
+
+</div>
+
+<div class="table-card">
+
+<table id="usersTable">
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Department</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Abebe Kebede</td>
+<td>abebe@email.com</td>
+<td>IT</td>
+<td>
+<span class="status active">
+Active
+</span>
+</td>
+<td>
+<button
+class="btn view"
+onclick="viewUser('Abebe Kebede')">
+View
+</button>
+
+<button
+class="btn delete"
+onclick="deleteUser(this)">
+Delete
+</button>
+</td>
+</tr>
+
+<tr>
+<td>Hana Tesfaye</td>
+<td>hana@email.com</td>
+<td>Finance</td>
+<td>
+<span class="status active">
+Active
+</span>
+</td>
+<td>
+<button
+class="btn view"
+onclick="viewUser('Hana Tesfaye')">
+View
+</button>
+
+<button
+class="btn delete"
+onclick="deleteUser(this)">
+Delete
+</button>
+</td>
+</tr>
+
+<tr>
+<td>Samuel Bekele</td>
+<td>samuel@email.com</td>
+<td>Engineering</td>
+<td>
+<span class="status inactive">
+Inactive
+</span>
+</td>
+<td>
+<button
+class="btn view"
+onclick="viewUser('Samuel Bekele')">
+View
+</button>
+
+<button
+class="btn delete"
+onclick="deleteUser(this)">
+Delete
+</button>
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const searchInput =
+document.getElementById("searchInput");
+
+searchInput.addEventListener(
+"keyup",
+function(){
+
+const value =
+this.value.toLowerCase();
+
+const rows =
+document.querySelectorAll(
+"#usersTable tbody tr"
+);
+
+rows.forEach(row=>{
+
+row.style.display =
+row.innerText.toLowerCase()
+.includes(value)
+? ""
+: "none";
+
+});
+
+});
+
+function viewUser(name){
+
+alert(
+"Viewing profile: " + name
+);
+
+/*
+
+Future Supabase Profile Page
+
+window.location.href =
+"user-profile.html?id=123";
+
+*/
+
+}
+
+function deleteUser(button){
+
+const confirmed =
+confirm(
+"Delete this user?"
+);
+
+if(!confirmed) return;
+
+button
+.closest("tr")
+.remove();
+
+/*
+
+Future Supabase Delete
+
+await supabase
+.from('users')
+.delete()
+.eq('id',userId)
+
+*/
+
+alert(
+"User deleted successfully."
+);
+
+}
+
+</script>
+
+</body>
+</html>

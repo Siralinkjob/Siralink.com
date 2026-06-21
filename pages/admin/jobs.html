@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jobs</title>
+
+<link rel="stylesheet"
+href="../assets/css/jobs.css">
+
+</head>
+
+<body>
+
+<header class="jobs-header">
+
+<h2>Available Jobs</h2>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search jobs...">
+
+</header>
+
+<section class="filters">
+
+<select id="departmentFilter">
+<option value="">Department</option>
+</select>
+
+<select id="locationFilter">
+<option value="">Location</option>
+</select>
+
+<select id="educationFilter">
+
+<option value="">Education</option>
+<option>10th Complete</option>
+<option>12th Complete</option>
+<option>Certificate</option>
+<option>Diploma</option>
+<option>Degree</option>
+<option>Masters</option>
+<option>PhD</option>
+
+</select>
+
+</section>
+
+<section id="jobsContainer">
+
+Loading Jobs...
+
+</section>
+
+<script type="module"
+src="../js/jobs/jobs.js">
+</script>
+
+</body>
+</html>
